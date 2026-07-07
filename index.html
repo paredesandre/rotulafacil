@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rótula Fácil | Software para Rotulagem e Precificação</title>
+  <meta name="description" content="Crie rótulos profissionais, tabelas nutricionais ANVISA, códigos de barras, QR Code e precifique seus produtos com facilidade." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0b0e14; color: #f0f3f8; overflow-x: hidden; }
+    a { text-decoration: none; }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(11, 14, 20, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 14px 0;
+    }
+    .navbar-brand { color: #fff !important; letter-spacing: -0.5px; }
+    .navbar-brand i { color: #fbbf24; }
+    .navbar .nav-link { color: rgba(255,255,255,0.75) !important; font-weight: 500; transition: 0.2s; }
+    .navbar .nav-link:hover { color: #fff !important; }
+    .btn-warning {
+      background: #fbbf24;
+      border: none;
+      color: #0b0e14;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px -8px rgba(251,191,36,0.4);
+    }
+    .btn-warning:hover { background: #fcd34d; transform: scale(1.02); box-shadow: 0 12px 28px -8px rgba(251,191,36,0.5); }
+    .btn-outline-light { border: 1.5px solid rgba(255,255,255,0.25); color: #fff; font-weight: 500; transition: 0.3s; }
+    .btn-outline-light:hover { background: rgba(255,255,255,0.08); border-color: #fff; color: #fff; }
+
+    /* HERO */
+    .hero {
+      padding: 140px 0 60px;
+      background: radial-gradient(circle at 70% 20%, #1f2937 0%, #0b0e14 90%);
+    }
+    .hero .badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      background: rgba(251,191,36,0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(251,191,36,0.25);
+      border-radius: 40px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { font-size: 1.15rem; color: #cbd5e1; max-width: 540px; margin-top: 1.2rem; line-height: 1.6; }
+    .hero-info { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .hero-info div { display: flex; align-items: center; gap: 0.5rem; color: #e2e8f0; font-weight: 500; font-size: 0.95rem; }
+    .hero-info i { color: #fbbf24; font-size: 1.2rem; }
+
+    /* IMAGEM PRINCIPAL (NOTEBOOK) */
+    .hero-image-main {
+      width: 100%;
+      max-width: 580px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+      background: #1e293b;
+      padding: 6px;
+      transition: 0.4s;
+    }
+    .hero-image-main:hover { transform: scale(1.01); }
+
+    /* CARDS FLUTUANTES */
+    .floating-card {
+      position: absolute;
+      background: rgba(15,23,42,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #f1f5f9;
+      box-shadow: 0 16px 32px -12px rgba(0,0,0,0.6);
+      white-space: nowrap;
+      z-index: 10;
+      animation: floatY 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .floating-card i { font-size: 1.3rem; color: #fbbf24; }
+    .card1 { top: 4%; left: -6%; animation-delay: 0s; }
+    .card2 { top: 22%; right: -6%; animation-delay: 1s; }
+    .card3 { bottom: 18%; left: -8%; animation-delay: 2s; }
+    .card4 { bottom: 4%; right: -6%; animation-delay: 3s; }
+
+    @keyframes floatY {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .hero-system { position: relative; display: inline-block; width: 100%; max-width: 580px; margin: 0 auto; }
+
+    /* SEÇÃO RECURSOS */
+    .recursos {
+      padding: 70px 0 60px;
+      background: #111820;
+      scroll-margin-top: 80px;
+    }
+    .recursos h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .recursos h2 span { color: #fbbf24; }
+    .recursos .subtitle { color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin: 0 auto 3rem auto; }
+
+    .card-recurso {
+      background: #1a2332;
+      border-radius: 24px;
+      padding: 1.5rem 1.2rem 1.8rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: 0.4s;
+      height: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s forwards;
+    }
+    .card-recurso:nth-child(1) { animation-delay: 0.1s; }
+    .card-recurso:nth-child(2) { animation-delay: 0.2s; }
+    .card-recurso:nth-child(3) { animation-delay: 0.3s; }
+    .card-recurso:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-recurso:hover {
+      transform: translateY(-8px);
+      border-color: rgba(251,191,36,0.25);
+      box-shadow: 0 20px 40px -16px rgba(0,0,0,0.6);
+    }
+    .card-recurso img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #0f172a;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .card-recurso h5 { color: #fff; font-weight: 600; margin-top: 0.25rem; }
+    .card-recurso p { color: #94a3b8; font-size: 0.95rem; margin-bottom: 0; }
+
+    /* ===== SEÇÃO DE PREÇOS / PLANOS ===== */
+    .planos {
+      padding: 60px 0 80px;
+      background: #0b0e14;
+    }
+    .planos h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .planos h2 span { color: #fbbf24; }
+    .planos .subtitle {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .card-plano {
+      background: #1a2332;
+      border-radius: 32px;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.4s;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-plano:hover {
+      transform: translateY(-8px);
+      border-color: rgba(251,191,36,0.2);
+      box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6);
+    }
+    /* Plano destaque (com precificação) */
+    .card-plano.destaque {
+      border-color: #fbbf24;
+      background: linear-gradient(145deg, #1f2a3f, #16202e);
+      box-shadow: 0 0 40px -8px rgba(251,191,36,0.08);
+    }
+    .card-plano.destaque .badge-plano {
+      background: #fbbf24;
+      color: #0b0e14;
+      font-weight: 700;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .card-plano .preco {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0.5rem 0;
+    }
+    .card-plano .preco small {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .card-plano .plano-nome {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-plano .plano-desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin: 0.5rem 0 1.5rem 0;
+    }
+    .card-plano .beneficios {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 2rem 0;
+      text-align: left;
+    }
+    .card-plano .beneficios li {
+      padding: 0.5rem 0;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 0.95rem;
+    }
+    .card-plano .beneficios li:last-child { border-bottom: none; }
+    .card-plano .beneficios i {
+      color: #fbbf24;
+      font-size: 1.1rem;
+      min-width: 20px;
+    }
+    .card-plano .btn-comprar {
+      width: 100%;
+      padding: 0.8rem;
+      font-weight: 600;
+      border-radius: 40px;
+      transition: 0.3s;
+      background: #fbbf24;
+      color: #0b0e14;
+      border: none;
+    }
+    .card-plano .btn-comprar:hover {
+      background: #fcd34d;
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px -8px rgba(251,191,36,0.4);
+    }
+    .card-plano.destaque .btn-comprar {
+      background: #fbbf24;
+      color: #0b0e14;
+      box-shadow: 0 8px 24px -8px rgba(251,191,36,0.3);
+    }
+    .card-plano .selo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(251,191,36,0.15);
+      border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 40px;
+      padding: 0.25rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fbbf24;
+      letter-spacing: 0.3px;
+    }
+    .parcela {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* DESTAQUE AO CHEGAR NA SEÇÃO */
+    .recursos.destaque .card-recurso {
+      animation: pulseGlow 1.2s ease;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(251,191,36,0.3); }
+      50% { box-shadow: 0 0 40px 10px rgba(251,191,36,0.15); }
+      100% { box-shadow: 0 0 0 0 rgba(251,191,36,0); }
+    }
+
+    /* RODAPÉ */
+    .footer {
+      background: #0b0e14;
+      padding: 50px 0 30px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer h6 { color: #fbbf24; font-weight: 600; }
+    .footer p, .footer a { color: #94a3b8; font-size: 0.95rem; }
+    .footer a:hover { color: #fbbf24; }
+    .footer .social i { font-size: 1.5rem; color: #64748b; transition: 0.3s; }
+    .footer .social i:hover { color: #fbbf24; }
+
+    @media (max-width: 992px) {
+      .hero h1 { font-size: 2.2rem; }
+      .floating-card { font-size: 0.7rem; padding: 6px 12px; min-width: auto; }
+      .card1 { top: 2%; left: -2%; }
+      .card2 { top: 18%; right: -2%; }
+      .card3 { bottom: 14%; left: -4%; }
+      .card4 { bottom: 2%; right: -2%; }
+      .card-plano .preco { font-size: 2.6rem; }
+    }
+    @media (max-width: 576px) {
+      .hero { padding: 120px 0 40px; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero-info { gap: 1rem; }
+      .floating-card { display: none; }
+      .recursos h2 { font-size: 1.8rem; }
+      .planos h2 { font-size: 1.8rem; }
+      .card-recurso img { max-height: 140px; }
+      .card-plano { padding: 2rem 1.2rem; }
+      .card-plano .preco { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3" href="#">
+        <i class="bi bi-tags-fill me-2"></i> Rótula Fácil
+      </a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#recursos">Recursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planos">Planos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#planos" class="btn btn-warning rounded-pill px-4 ms-lg-3 mt-3 mt-lg-0">Comprar Agora</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="badge mb-4"><i class="bi bi-windows me-1"></i> Software Desktop para Windows</span>
+          <h1>
+            Crie Rótulos Profissionais,<br />
+            <span>Tabelas Nutricionais</span><br />
+            e Precifique seus Produtos.
+          </h1>
+          <p>
+            Desenvolvido para pequenos produtores, confeitarias, padarias, restaurantes,
+            agroindústrias e MEIs que precisam criar rótulos conforme a legislação brasileira,
+            imprimir etiquetas e controlar seus custos.
+          </p>
+          <div class="mt-4 d-flex flex-column flex-md-row gap-3">
+            <a href="#planos" class="btn btn-warning btn-lg rounded-pill px-5">Comprar Agora</a>
+            <a href="#recursos" class="btn btn-outline-light btn-lg rounded-pill px-5" id="btnDemonstracao">
+              Ver Demonstração
+            </a>
+          </div>
+          <div class="hero-info mt-5">
+            <div><i class="bi bi-check-circle-fill"></i> Licença Definitiva</div>
+            <div><i class="bi bi-check-circle-fill"></i> Atualizações</div>
+            <div><i class="bi bi-check-circle-fill"></i> Suporte</div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 text-center">
+          <div class="hero-system">
+            <img src="img/notebook.png" class="hero-image-main" alt="Interface do Rótula Fácil" />
+            <div class="floating-card card1"><i class="bi bi-table"></i> Tabela ANVISA</div>
+            <div class="floating-card card2"><i class="bi bi-upc-scan"></i> Código de Barras</div>
+            <div class="floating-card card3"><i class="bi bi-qr-code"></i> QR Code</div>
+            <div class="floating-card card4"><i class="bi bi-cash-stack"></i> Precificação</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SEÇÃO RECURSOS ====== -->
+  <section class="recursos" id="recursos">
+    <div class="container">
+      <div class="text-center">
+        <h2>Funcionalidades <span>poderosas</span></h2>
+        <p class="subtitle">Tudo o que você precisa para criar rótulos profissionais e gerenciar seus produtos.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="card-recurso">
+            <img src="img/tabela_nutricional.png" alt="Tabela Nutricional ANVISA" />
+            <h5>Tabela Nutricional</h5>
+            <p>Conforme padrão ANVISA, com cálculo automático.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="card-recurso">
+            <img src="img/cdbar.png" alt="Código de Barras" />
+            <h5>Código de Barras</h5>
+            <p>Gere códigos EAN-13 para todos os seus produtos.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="card-recurso">
+            <img src="img/cardapio.png" alt="QR Code" />
+            <h5>QR Code</h5>
+            <p>Inclua QR Codes com informações do produto.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="card-recurso">
+            <img src="img/precificacao.png" alt="Precificação" />
+            <h5>Precificação</h5>
+            <p>Calcule margem, lucro e preço de venda com facilidade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SEÇÃO DE PLANOS / PREÇOS ====== -->
+  <section class="planos" id="planos">
+    <div class="container">
+      <div class="text-center">
+        <h2>Escolha o <span>plano ideal</span></h2>
+        <p class="subtitle">Adquira agora e tenha acesso imediato ao software com licença definitiva.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- PLANO 1: Rótula Fácil Básico -->
+        <div class="col-lg-5 col-md-6">
+          <div class="card-plano">
+            <div class="plano-nome">Rótula Fácil</div>
+            <div class="plano-desc">Módulo de etiquetas, rótulos e tabela nutricional</div>
+
+            <div class="preco">
+              R$ 69,90 <small>à vista</small>
+            </div>
+            <div class="parcela">ou em até 3x de R$ 23,30 sem juros</div>
+
+            <ul class="beneficios">
+              <li><i class="bi bi-check-circle-fill"></i> Criação de rótulos profissionais</li>
+              <li><i class="bi bi-check-circle-fill"></i> Tabela nutricional ANVISA</li>
+              <li><i class="bi bi-check-circle-fill"></i> Geração de código de barras</li>
+              <li><i class="bi bi-check-circle-fill"></i> QR Code para produtos</li>
+              <li><i class="bi bi-check-circle-fill"></i> Impressão de etiquetas</li>
+              <li><i class="bi bi-check-circle-fill"></i> Licença definitiva</li>
+            </ul>
+
+            <a href="#" class="btn-comprar">
+              <i class="bi bi-cart-plus me-2"></i> Comprar Agora
+            </a>
+          </div>
+        </div>
+
+        <!-- PLANO 2: Rótula Fácil + Precificação (DESTAQUE) -->
+        <div class="col-lg-5 col-md-6">
+          <div class="card-plano destaque">
+            <span class="selo"><i class="bi bi-star-fill me-1"></i> MAIS VENDIDO</span>
+            <div class="plano-nome">Rótula Fácil <span style="color:#fbbf24;">+ Precificação</span></div>
+            <div class="plano-desc">Tudo do plano básico + módulo de precificação</div>
+
+            <div class="preco">
+              R$ 89,90 <small>à vista</small>
+            </div>
+            <div class="parcela">ou em até 3x de R$ 29,97 sem juros</div>
+
+            <ul class="beneficios">
+              <li><i class="bi bi-check-circle-fill"></i> <strong>Todos os benefícios do plano básico</strong></li>
+              <li><i class="bi bi-check-circle-fill"></i> Cálculo automático de margem de lucro</li>
+              <li><i class="bi bi-check-circle-fill"></i> Precificação com markup</li>
+              <li><i class="bi bi-check-circle-fill"></i> Relatórios de custos</li>
+              <li><i class="bi bi-check-circle-fill"></i> Definição de preço de venda sugerido</li>
+              <li><i class="bi bi-check-circle-fill"></i> Licença definitiva + prioridade no suporte</li>
+            </ul>
+
+            <a href="#" class="btn-comprar">
+              <i class="bi bi-cart-plus me-2"></i> Comprar Agora
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== RODAPÉ ====== -->
+  <footer class="footer" id="contato">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="fw-bold text-white"><i class="bi bi-tags-fill me-2 text-warning"></i>Rótula Fácil</h5>
+          <p class="mt-2" style="color:#94a3b8; max-width:280px;">
+            Nutrição e conformidade na palma da mão.
+          </p>
+          <div class="social mt-2">
+            <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <h6>Suporte</h6>
+          <p><i class="bi bi-envelope me-2"></i> dev.eonweb@gmail.com</p>
+          <p><i class="bi bi-whatsapp me-2"></i> (41) 99733-7026</p>
+          <p class="mt-2" style="font-size:0.85rem; color:#64748b;">Atendimento de segunda a sexta, 9h às 18h</p>
+        </div>
+
+        <div class="col-md-4">
+          <h6>Vendas</h6>
+          <p><i class="bi bi-envelope me-2"></i> joaoandre4167@gmail.com</p>
+          <p><i class="bi bi-whatsapp me-2"></i> (41) 99733-7026</p>
+        </div>
+      </div>
+
+      <hr class="border-secondary opacity-25 my-4" />
+      <div class="text-center" style="color:#64748b; font-size:0.9rem;">
+        © 2025 Rótula Fácil App — tecnologia em rotulagem
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ============================================
+    // 1. ROLAGEM SUAVE PARA TODOS OS LINKS ÂNCORA
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ============================================
+    // 2. DESTAQUE AO CLICAR EM "VER DEMONSTRAÇÃO"
+    // ============================================
+    const btnDemo = document.getElementById('btnDemonstracao');
+    const secaoRecursos = document.getElementById('recursos');
+
+    btnDemo.addEventListener('click', function(e) {
+      secaoRecursos.classList.remove('destaque');
+      void secaoRecursos.offsetWidth;
+      secaoRecursos.classList.add('destaque');
+      setTimeout(() => {
+        secaoRecursos.classList.remove('destaque');
+      }, 2000);
+    });
+
+    // ============================================
+    // 3. FECHA MENU MOBILE AO CLICAR EM LINK
+    // ============================================
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const collapse = document.querySelector('.navbar-collapse');
+        if (collapse.classList.contains('show')) {
+          document.querySelector('.navbar-toggler').click();
+        }
+      });
+    });
+
+    // ============================================
+    // 4. ANIMAÇÃO DOS CARDS DE PREÇO AO ENTRAR NA TELA
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card-plano');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.2 });
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>
