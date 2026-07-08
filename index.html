@@ -169,9 +169,9 @@
     .card-recurso h5 { color: #fff; font-weight: 600; margin-top: 0.25rem; }
     .card-recurso p { color: #94a3b8; font-size: 0.95rem; margin-bottom: 0; }
 
-    /* ===== SEÇÃO DE PREÇOS / PLANOS ===== */
+    /* SEÇÃO PLANOS */
     .planos {
-      padding: 60px 0 80px;
+      padding: 60px 0 60px;
       background: #0b0e14;
     }
     .planos h2 {
@@ -202,7 +202,6 @@
       border-color: rgba(251,191,36,0.2);
       box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6);
     }
-    /* Plano destaque (com precificação) */
     .card-plano.destaque {
       border-color: #fbbf24;
       background: linear-gradient(145deg, #1f2a3f, #16202e);
@@ -300,6 +299,75 @@
       margin-bottom: 1rem;
     }
 
+    /* ===== SEÇÃO REQUISITOS MÍNIMOS ===== */
+    .requisitos {
+      padding: 60px 0 70px;
+      background: #111820;
+      border-top: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .requisitos h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .requisitos h2 span { color: #fbbf24; }
+    .requisitos .subtitle {
+      color: #94a3b8;
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    .requisitos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .requisito-item {
+      background: #1a2332;
+      border-radius: 20px;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: 0.3s;
+    }
+    .requisito-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(251,191,36,0.15);
+      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.4);
+    }
+    .requisito-item .icon {
+      font-size: 2.2rem;
+      color: #fbbf24;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .requisito-item .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .requisito-item .value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 0.2rem;
+    }
+    .requisito-item .value small {
+      font-weight: 400;
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+    .requisito-item.destaque-req {
+      border-color: rgba(251,191,36,0.15);
+      background: rgba(251,191,36,0.03);
+    }
+
     /* DESTAQUE AO CHEGAR NA SEÇÃO */
     .recursos.destaque .card-recurso {
       animation: pulseGlow 1.2s ease;
@@ -330,6 +398,7 @@
       .card3 { bottom: 14%; left: -4%; }
       .card4 { bottom: 2%; right: -2%; }
       .card-plano .preco { font-size: 2.6rem; }
+      .requisitos-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 576px) {
       .hero { padding: 120px 0 40px; }
@@ -338,9 +407,14 @@
       .floating-card { display: none; }
       .recursos h2 { font-size: 1.8rem; }
       .planos h2 { font-size: 1.8rem; }
+      .requisitos h2 { font-size: 1.6rem; }
       .card-recurso img { max-height: 140px; }
       .card-plano { padding: 2rem 1.2rem; }
       .card-plano .preco { font-size: 2.2rem; }
+      .requisitos-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .requisito-item { padding: 1.2rem 0.8rem; }
+      .requisito-item .icon { font-size: 1.6rem; }
+      .requisito-item .value { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -359,7 +433,7 @@
         <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="#recursos">Recursos</a></li>
           <li class="nav-item"><a class="nav-link" href="#planos">Planos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#requisitos">Requisitos</a></li>
         </ul>
         <a href="#planos" class="btn btn-warning rounded-pill px-4 ms-lg-3 mt-3 mt-lg-0">Comprar Agora</a>
       </div>
@@ -452,7 +526,7 @@
     </div>
   </section>
 
-  <!-- ====== SEÇÃO DE PLANOS / PREÇOS ====== -->
+  <!-- ====== SEÇÃO DE PLANOS ====== -->
   <section class="planos" id="planos">
     <div class="container">
       <div class="text-center">
@@ -461,17 +535,13 @@
       </div>
 
       <div class="row g-4 justify-content-center">
-        <!-- PLANO 1: Rótula Fácil Básico -->
+        <!-- PLANO 1 -->
         <div class="col-lg-5 col-md-6">
           <div class="card-plano">
             <div class="plano-nome">Rótula Fácil</div>
             <div class="plano-desc">Módulo de etiquetas, rótulos e tabela nutricional</div>
-
-            <div class="preco">
-              R$ 69,90 <small>à vista</small>
-            </div>
+            <div class="preco">R$ 69,90 <small>à vista</small></div>
             <div class="parcela">ou em até 3x de R$ 23,30 sem juros</div>
-
             <ul class="beneficios">
               <li><i class="bi bi-check-circle-fill"></i> Criação de rótulos profissionais</li>
               <li><i class="bi bi-check-circle-fill"></i> Tabela nutricional ANVISA</li>
@@ -480,25 +550,18 @@
               <li><i class="bi bi-check-circle-fill"></i> Impressão de etiquetas</li>
               <li><i class="bi bi-check-circle-fill"></i> Licença definitiva</li>
             </ul>
-
-            <a href="#" class="btn-comprar">
-              <i class="bi bi-cart-plus me-2"></i> Comprar Agora
-            </a>
+            <a href="#" class="btn-comprar"><i class="bi bi-cart-plus me-2"></i> Comprar Agora</a>
           </div>
         </div>
 
-        <!-- PLANO 2: Rótula Fácil + Precificação (DESTAQUE) -->
+        <!-- PLANO 2: DESTAQUE -->
         <div class="col-lg-5 col-md-6">
           <div class="card-plano destaque">
             <span class="selo"><i class="bi bi-star-fill me-1"></i> MAIS VENDIDO</span>
             <div class="plano-nome">Rótula Fácil <span style="color:#fbbf24;">+ Precificação</span></div>
             <div class="plano-desc">Tudo do plano básico + módulo de precificação</div>
-
-            <div class="preco">
-              R$ 89,90 <small>à vista</small>
-            </div>
+            <div class="preco">R$ 89,90 <small>à vista</small></div>
             <div class="parcela">ou em até 3x de R$ 29,97 sem juros</div>
-
             <ul class="beneficios">
               <li><i class="bi bi-check-circle-fill"></i> <strong>Todos os benefícios do plano básico</strong></li>
               <li><i class="bi bi-check-circle-fill"></i> Cálculo automático de margem de lucro</li>
@@ -507,11 +570,62 @@
               <li><i class="bi bi-check-circle-fill"></i> Definição de preço de venda sugerido</li>
               <li><i class="bi bi-check-circle-fill"></i> Licença definitiva + prioridade no suporte</li>
             </ul>
-
-            <a href="#" class="btn-comprar">
-              <i class="bi bi-cart-plus me-2"></i> Comprar Agora
-            </a>
+            <a href="#" class="btn-comprar"><i class="bi bi-cart-plus me-2"></i> Comprar Agora</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SEÇÃO REQUISITOS MÍNIMOS ====== -->
+  <section class="requisitos" id="requisitos">
+    <div class="container">
+      <div class="text-center">
+        <h2>Requisitos <span>Mínimos</span></h2>
+        <p class="subtitle">Confira se seu computador atende aos requisitos para rodar o Rótula Fácil com desempenho.</p>
+      </div>
+
+      <div class="requisitos-grid">
+        <!-- Sistema Operacional -->
+        <div class="requisito-item destaque-req">
+          <span class="icon"><i class="bi bi-windows"></i></span>
+          <div class="label">Sistema Operacional</div>
+          <div class="value">Windows 10 / 11 <small>(64 bits)</small></div>
+        </div>
+
+        <!-- Processador -->
+        <div class="requisito-item">
+          <span class="icon"><i class="bi bi-cpu"></i></span>
+          <div class="label">Processador</div>
+          <div class="value">Intel Core i3 <small>ou equivalente</small></div>
+        </div>
+
+        <!-- Memória RAM -->
+        <div class="requisito-item">
+          <span class="icon"><i class="bi bi-memory"></i></span>
+          <div class="label">Memória RAM</div>
+          <div class="value">4 GB <small>recomendado 8 GB</small></div>
+        </div>
+
+        <!-- Espaço em Disco -->
+        <div class="requisito-item">
+          <span class="icon"><i class="bi bi-hdd-stack"></i></span>
+          <div class="label">Espaço em Disco</div>
+          <div class="value">500 MB <small>+ 1 GB para dados</small></div>
+        </div>
+
+<!--         
+        <div class="requisito-item">
+          <span class="icon"><i class="bi bi-display"></i></span>
+          <div class="label">Resolução de Tela</div>
+          <div class="value">1366 × 768 <small>mínimo</small></div>
+        </div> -->
+
+        <!-- Internet -->
+        <div class="requisito-item destaque-req">
+          <span class="icon"><i class="bi bi-wifi"></i></span>
+          <div class="label">Conexão com Internet</div>
+          <div class="value">Ativação <small>e atualizações</small></div>
         </div>
       </div>
     </div>
@@ -568,58 +682,4 @@
         if (target) {
           const offset = 80;
           const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // ============================================
-    // 2. DESTAQUE AO CLICAR EM "VER DEMONSTRAÇÃO"
-    // ============================================
-    const btnDemo = document.getElementById('btnDemonstracao');
-    const secaoRecursos = document.getElementById('recursos');
-
-    btnDemo.addEventListener('click', function(e) {
-      secaoRecursos.classList.remove('destaque');
-      void secaoRecursos.offsetWidth;
-      secaoRecursos.classList.add('destaque');
-      setTimeout(() => {
-        secaoRecursos.classList.remove('destaque');
-      }, 2000);
-    });
-
-    // ============================================
-    // 3. FECHA MENU MOBILE AO CLICAR EM LINK
-    // ============================================
-    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        const collapse = document.querySelector('.navbar-collapse');
-        if (collapse.classList.contains('show')) {
-          document.querySelector('.navbar-toggler').click();
-        }
-      });
-    });
-
-    // ============================================
-    // 4. ANIMAÇÃO DOS CARDS DE PREÇO AO ENTRAR NA TELA
-    // ============================================
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.card-plano');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, { threshold: 0.2 });
-      cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-      });
-    });
-  </script>
-</body>
-</html>
+          window.scrollTo({ top,
