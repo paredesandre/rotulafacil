@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-Security-Policy" 
+     content="frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com;">
+
+    <title>Rotula Fácil | Tutoriais em Vídeo (Conteúdo Local)</title>
+    <!-- Bootstrap 5 CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f4f7fc;
+            font-family: system-ui, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1.6rem;
+        }
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.8rem;
+        }
+        .hero-section {
+            background: linear-gradient(105deg, #0a2b44 0%, #0d6efd 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2.5rem;
+            border-radius: 0 0 2rem 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .hero-section h1 {
+            font-weight: 700;
+            font-size: 2.6rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .hero-section .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+        .card-video {
+            border: none;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #ffffff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05), 0 6px 6px rgba(0,0,0,0.03);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-video:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+        }
+        .ratio-16x9 {
+            border-radius: 1rem 1rem 0 0;
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #000;
+        }
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: #0a2b44;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title i {
+            font-size: 1.5rem;
+            color: #0d6efd;
+        }
+        .card-text {
+            color: #4a5568;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+            flex: 1;
+        }
+        .btn-outline-custom {
+            border: 1px solid #0d6efd;
+            color: #0d6efd;
+            border-radius: 50px;
+            padding: 0.3rem 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            align-self: flex-start;
+        }
+        .btn-outline-custom:hover {
+            background: #0d6efd;
+            color: white;
+            transform: scale(1.02);
+        }
+        .footer-custom {
+            background-color: #0a2b44;
+            color: #e2e8f0;
+            padding: 2rem 0;
+            margin-top: 3.5rem;
+            border-top: 1px solid #1e3a5f;
+        }
+        .footer-custom a {
+            color: #9ec8ff;
+            text-decoration: none;
+        }
+        .footer-custom a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        .badge-duration {
+            background-color: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+            font-weight: 500;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        /* Ajuste para que os cards fiquem bem distribuídos em todas as telas */
+        .card-wrapper {
+            display: flex;
+            height: 100%;
+        }
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.9rem;
+            }
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+        video:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-camera-reels-fill"></i>Rotula-Fácil Academy
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><i class="bi bi-house-door-fill"></i> Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#funcionalidades">Funcionalidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#infoModal"><i class="bi bi-info-circle"></i> Sobre</a> -->
+                         <a class="nav-link" href="#" data-bs-toggle="modal" ><i class="bi bi-info-circle"></i> Sobre</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1><i class="bi bi-play-circle-fill"></i> Vídeos locais – Aprenda na prática</h1>
+           
+            <div class="mt-4">
+                <span class="badge bg-light text-dark p-2 me-2"><i class="bi bi-file-play-fill"></i> 5 vídeos em MP4</span>
+                <span class="badge bg-light text-dark p-2"><i class="bi bi-hdd-stack-fill"></i> Armazenamento na Nuvem</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards de vídeos - Layout responsivo: 1 por linha em mobile, 2 em tablets, 3 em desktops grandes -->
+    <div class="container" id="funcionalidades">
+        <div class="row g-4">
+            <!-- VÍDEO 1 - INTRODUÇÃO -->
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+                <div class="card-video w-100">
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                            src="https://www.youtube-nocookie.com/embed/sdmk5AyYXkw?rel=0&modestbranding=1"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Introdução ao Sistema"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="card-title">
+                                <i class="bi bi-1-circle-fill"></i> Introdução
+                            </div>
+                            <span class="badge-duration"><i class="bi bi-clock"></i> 3 min</span>
+                        </div>
+                        <p class="card-text">Visão geral do aplicativo, módulos principais, navegação e primeiros passos. Entenda como o sistema acelera sua gestão diária.</p>
+                        <a href="#" class="btn btn-outline-custom btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Assista ao vídeo completo sobre introdução">
+                            <i class="bi bi-eye-fill"></i> Assistir agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VÍDEO 2 - CADASTRO DE CLIENTE E PRODUTOS -->
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+                <div class="card-video w-100">
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                        
+                            src="https://www.youtube-nocookie.com/embed/IhWkYj8MMd8?rel=0&modestbranding=1"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Introdução ao Sistema"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+ 
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="card-title">
+                                <i class="bi bi-2-circle-fill"></i> Cadastro de Cliente e Produtos
+                            </div>
+                            <span class="badge-duration"><i class="bi bi-clock"></i> 8 min</span>
+                        </div>
+                        <p class="card-text">Aprenda a cadastrar, editar e excluir clientes e produtos. Controle categorias, tipo de embalagem e unidade.</p>
+                        <a href="#" class="btn btn-outline-custom btn-sm" data-bs-toggle="tooltip" title="Tutorial completo de CRUD de clientes e produtos">
+                            <i class="bi bi-eye-fill"></i> Assistir agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VÍDEO 3 - TABELA NUTRICIONAL -->
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+                <div class="card-video w-100">
+                    <div class="ratio ratio-16x9">
+                         <iframe 
+                            src="https://www.youtube-nocookie.com/embed/79r8o6EXhX4?rel=0&modestbranding=1"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Introdução ao Sistema"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="card-title">
+                                <i class="bi bi-3-circle-fill"></i> Tabela Nutricional
+                            </div>
+                            <span class="badge-duration"><i class="bi bi-clock"></i> 5 min</span>
+                        </div>
+                        <p class="card-text">Passo a passo para gerar tabelas nutricionais completas, atendendo à legislação. Insira valores, percentuais e personalize o design dos rótulos.</p>
+                        <a href="#" class="btn btn-outline-custom btn-sm" data-bs-toggle="tooltip" title="Aprenda a criar tabelas nutricionais profissionais">
+                            <i class="bi bi-eye-fill"></i> Assistir agora
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- VÍDEO 4 - INGREDIENTES (NOVO) -->
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+                <div class="card-video w-100">
+                    <div class="ratio ratio-16x9">
+                         <iframe 
+                            src="https://www.youtube-nocookie.com/embed/pR5w_z8XyYw?rel=0&modestbranding=1"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Introdução ao Sistema"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="card-title">
+                                <i class="bi bi-4-circle-fill"></i> Gestão de Ingredientes
+                            </div>
+                            <span class="badge-duration"><i class="bi bi-clock"></i> 3 min</span>
+                        </div>
+                        <p class="card-text">Cadastro e controle de ingredientes, Alérgenos e integração com receitas. Mantenha sempre organizado.</p>
+                        <a href="#" class="btn btn-outline-custom btn-sm" data-bs-toggle="tooltip" title="Domine a gestão de ingredientes no sistema">
+                            <i class="bi bi-eye-fill"></i> Assistir agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VÍDEO 5 - ETIQUETAS E RÓTULOS -->
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+                <div class="card-video w-100">
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                            src="https://www.youtube-nocookie.com/embed/apgxcLCtre0?rel=0&modestbranding=1"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Introdução ao Sistema"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="card-title">
+                                <i class="bi bi-5-circle-fill"></i> Etiquetas e Rótulos
+                            </div>
+                            <span class="badge-duration"><i class="bi bi-clock"></i> 11 min</span>
+                        </div>
+                        <p class="card-text">Como criar etiquetas personalizadas, código de barras, QR Code e rótulos profissionais para embalagens. Imprima diretamente do sistema.</p>
+                        <a href="#" class="btn btn-outline-custom btn-sm" data-bs-toggle="tooltip" title="Design e impressão de etiquetas e rótulos">
+                            <i class="bi bi-eye-fill"></i> Assistir agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- VÍDEO 3 - TABELA NUTRICIONAL -->
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex">
+                <div class="card-video w-100">
+                    <div class="ratio ratio-16x9">
+                         <iframe 
+                            src="https://www.youtube-nocookie.com/embed/LJPu0nfYXBw?rel=0&modestbranding=1"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Introdução ao Sistema"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="card-title">
+                                <i class="bi bi-3-circle-fill"></i> Como Cadastar Ficha Técnica
+                            </div>
+                            <span class="badge-duration"><i class="bi bi-clock"></i> 5 min</span>
+                        </div>
+                        <p class="card-text">Passo a passo para gerar tabelas nutricionais completas, atendendo à legislação. Insira valores, percentuais e personalize o design dos rótulos.</p>
+                        <a href="#" class="btn btn-outline-custom btn-sm" data-bs-toggle="tooltip" title="Aprenda a criar tabelas nutricionais profissionais">
+                            <i class="bi bi-eye-fill"></i> Assistir agora
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <i class="bi bi-box-seam fs-4 me-1"></i> <strong>Rotula Fácil</strong> - Solução completa para gestão inteligente
+                    <div class="mt-2 small">
+                        &copy; 2025 Todos os direitos reservados | Vídeos 
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <!-- <a href="#" class="text-white-50 me-3" data-bs-toggle="tooltip" data-bs-target="#modalContato" title="Suporte Rápido"><i class="bi bi-headset"></i> Suporte</a> -->
+                    <a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#modalContato"><i class="bi bi-envelope-fill"></i> Fale conosco</a>
+                    <a href="{% url 'ajuda' %}" class="text-white-50 me-3" data-bs-toggle="tooltip" title="Documentação"><i class="bi bi-file-text-fill"></i> Docs</a>
+                    <a href="#" class="text-white-50" data-bs-toggle="tooltip" title="Versão 2.0"><i class="bi bi-cloud-arrow-up-fill"></i> Atualizações</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Modal contato / suporte -->
+    <div class="modal fade" id="modalContato" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="bi bi-headset"></i> Suporte comercial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Dúvidas sobre planos, recargas ou suspensão? Entre em contato:</p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-envelope"></i> <strong>eonweb.contato@gmail.com</strong></li>
+                        <li><i class="bi bi-whatsapp"></i> <strong>(41) 99733-7026</strong></li>
+                        <li><i class="bi bi-clock"></i> Atendimento: seg–sex, 9h–18h</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal com instruções de configuração Django -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="infoModalLabel"><i class="bi bi-django"></i> Configuração dos vídeos locais no Django</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Para que os vídeos funcionem corretamente, siga estas etapas no seu projeto Django:</p>
+                    <ol class="list-group list-group-numbered mb-3">
+                        <li class="list-group-item bg-transparent">Crie a pasta <code>media/videos/</code> na raiz do seu projeto (ao lado do <code>manage.py</code>).</li>
+                        <li class="list-group-item bg-transparent">Adicione os arquivos de vídeo com os nomes:<br>
+                            <code>introducao.mp4</code>, <code>cadastro_cliente_produtos.mp4</code>, <code>tabela_nutricional.mp4</code>, <code>ingredientes.mp4</code>, <code>etiquetas_rotulos.mp4</code>.
+                        </li>
+                        <li class="list-group-item bg-transparent">No <code>settings.py</code>, configure:<br>
+                            <code>MEDIA_URL = '/media/'</code><br>
+                            <code>MEDIA_ROOT = BASE_DIR / 'media'</code>
+                        </li>
+                        <li class="list-group-item bg-transparent">No <code>urls.py</code> (apenas desenvolvimento), adicione:<br>
+                            <code>+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</code>
+                        </li>
+                        <li class="list-group-item bg-transparent">Se quiser uma imagem de thumbnail (poster), coloque arquivos <code>.jpg</code> com os mesmos nomes + <code>_thumb</code> (ex: <code>introducao_thumb.jpg</code>) na mesma pasta.</li>
+                    </ol>
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle-fill"></i> <strong>Importante:</strong> Em produção, use um servidor web (Nginx, Apache) para servir os arquivos de mídia. Nunca confie no <code>runserver</code> para produção.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS + inicialização de tooltips e interação -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
+            });
+
+            // Botões "Assistir agora" -> rolagem suave e tentativa de play
+          const watchButtons = document.querySelectorAll('.btn-outline-custom');
+          watchButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const card = btn.closest('.card-video');
+                    const iframe = card.querySelector('iframe');
+
+                    if (iframe) {
+                        // pega o src atual
+                        let src = iframe.getAttribute('src');
+
+                        // adiciona autoplay=1 se ainda não tiver
+                        if (!src.includes('autoplay=1')) {
+                            src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                        }
+
+                        // força recarregar com autoplay
+                        iframe.setAttribute('src', src);
+
+                        // rola até o vídeo
+                        iframe.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+
+                    // destaque visual
+                    card.style.boxShadow = '0 0 0 3px rgba(13,110,253,0.5)';
+                    setTimeout(() => {
+                        card.style.boxShadow = '';
+                    }, 800);
+                });
+            });
+
+            function showToast(message) {
+                const toastContainer = document.createElement('div');
+                toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
+                toastContainer.style.zIndex = '1090';
+                toastContainer.innerHTML = `
+                    <div class="toast align-items-center text-bg-primary border-0 show" role="alert">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <i class="bi bi-info-circle-fill"></i> ${message}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(toastContainer);
+                setTimeout(() => toastContainer.remove(), 2500);
+            }
+
+            // Detecção de erro nos vídeos (arquivo não encontrado)
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('error', function() {
+                    const src = this.querySelector('source')?.src || this.src;
+                    console.warn(`Vídeo não encontrado: ${src}`);
+                    this.style.backgroundColor = '#212529';
+                    // Evita múltiplas mensagens
+                    if (!this.nextElementSibling || !this.nextElementSibling.classList.contains('video-error-fallback')) {
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'alert alert-danger mt-2 small video-error-fallback';
+                        errorDiv.innerHTML = `Vídeo não encontrado: ${src.split('/').pop()}`;
+                        this.insertAdjacentElement('afterend', errorDiv);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
